@@ -153,7 +153,11 @@ body {
 
 .nav-list {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 40px;
+  margin: 0;
+  list-style: none;
 }
 
 .burger-menu {
@@ -181,11 +185,13 @@ body {
   visibility: hidden;
   pointer-events: none;
 }
+
 .mobile-menu.is-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
+
 .mobile-menu-conteiner {
   position: relative;
   padding-top: 72px;
@@ -248,6 +254,11 @@ body {
   line-height: 1.11111;
   letter-spacing: 0.02em;
   color: #2e2f42;
+}
+
+.address-mobile {
+  display: block;
+  padding-bottom: 48px;
 }
 
 .address-nav-mobile,
@@ -606,8 +617,8 @@ body {
 }
 
 .footer-text {
-  margin-top: 16px;
-  max-width: 264px;
+  margin: 16px auto 0;
+  max-width: 288px;
   color: #f4f4fd;
 }
 
@@ -617,6 +628,7 @@ body {
 
 .social-links-footer {
   display: flex;
+  justify-content: center;
   gap: 16px;
   margin-top: 16px;
 }
@@ -641,12 +653,8 @@ body {
   align-items: baseline;
 }
 
-.link-item-footer {
-  margin-left: 120px;
-}
-
 .mail-form {
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .text-social {
@@ -659,7 +667,7 @@ body {
 .mail-form {
   display: flex;
   flex-direction: column;
-  max-width: 453px;
+  max-width: 288px;
   margin-left: auto;
 }
 
@@ -674,7 +682,9 @@ body {
 
 .input-row {
   display: flex;
+  flex-direction: column;
   gap: 24px;
+  align-items: center;
 }
 
 .input-email {
@@ -998,7 +1008,7 @@ body {
 @media screen and (min-width: 768px) {
   .container--narrow {
     max-width: 768px;
-    padding: 0 108px; /* 552 + 108 + 108 */
+    padding: 0 108px;
   }
 }
 
@@ -1009,7 +1019,7 @@ body {
   }
 }
 
-/* Header: на мобилке прячем nav+contacts, показываем бургер */
+/* Header */
 @media screen and (max-width: 767px) {
   .nav,
   .contacts {
@@ -1113,7 +1123,7 @@ body {
   }
 }
 
-/* Features: 1 -> 2 -> 4 */
+/* Features*/
 @media screen and (max-width: 767px) {
   .club-list {
     flex-direction: column;
@@ -1126,7 +1136,6 @@ body {
     display: none;
   }
 
-  /* D6: заголовки фич на мобилке крупнее */
   .club-item .title {
     font-weight: 700;
     font-size: 36px;
@@ -1135,6 +1144,12 @@ body {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1157px) {
+  .hero-title {
+    font-size: 56px;
+    line-height: 1.07;
+    max-width: 496px;
+  }
+
   .club-list {
     flex-wrap: wrap;
     gap: 72px 24px;
@@ -1142,8 +1157,24 @@ body {
   .club-item {
     flex-basis: calc((100% - 24px) / 2);
   }
+  .club-item .title {
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.11;
+  }
   .icon-box {
     display: none;
+  }
+
+  .contacts-list {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .contacts-link {
+    padding: 0;
+    font-size: 12px;
+    line-height: 1.17;
   }
 }
 
@@ -1158,7 +1189,7 @@ body {
   }
 }
 
-/* Team: 1 -> 2 -> 4 */
+/* Team*/
 @media screen and (max-width: 767px) {
   .team-list {
     flex-direction: column;
@@ -1183,7 +1214,7 @@ body {
   }
 }
 
-/* Portfolio: 1 -> 2 -> 3 */
+/* Portfolio */
 @media screen and (max-width: 767px) {
   .portfolio-list {
     flex-direction: column;
@@ -1200,20 +1231,28 @@ body {
   }
 }
 
-/* Footer: колонка на мобилке, без margin-left 120px */
+/* Footer колонка на мобилке */
 @media screen and (max-width: 767px) {
   .page-footer {
     padding: 96px 0;
+    text-align: center;
+    align-items: center;
   }
 
   .page-footer .container {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 72px;
   }
-
   .link-item-footer {
     margin-left: 0;
+    width: 288px;
+  }
+
+  .logo-item-footer {
+    width: 288px;
+    text-align: center;
   }
   .mail-form {
     margin-left: 0;
@@ -1225,22 +1264,55 @@ body {
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    align-items: center;
   }
 
-  .input-email {
-    width: 100%;
-  }
   .mail-button {
-    width: 100%;
     justify-content: center;
   }
 }
 
-/* Modal: чтобы точно влазила на 320px */
 .popup-review {
   width: calc(100% - 32px);
   max-width: 408px;
 }
 .text-terms {
   width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1157px) {
+  .page-footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 72px 24px;
+  }
+
+  .logo-item-footer {
+    max-width: 264px;
+  }
+
+  .link-item-footer {
+    margin-left: 0;
+  }
+
+  .mail-form {
+    width: 100%;
+    max-width: 453px;
+    margin-left: 0;
+  }
+
+  .input-row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .input-email {
+    width: 264px;
+  }
+
+  .mail-button {
+    width: 165px;
+  }
 }
