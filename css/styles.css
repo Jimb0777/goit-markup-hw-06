@@ -1334,10 +1334,6 @@ img {
   gap: 72px; /* mobile distance between title and button */
 }
 
-.hero-btn {
-  margin-top: 0 !important; /* kill margin-based spacing */
-}
-
 /* tablet */
 @media screen and (min-width: 768px) {
   .hero-wrap {
@@ -1392,5 +1388,80 @@ img {
   .container--narrow {
     max-width: 1158px;
     padding: 0 15px;
+  }
+}
+
+.hero {
+  padding: 72px 0; /* mobile */
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    padding: 112px 0; /* tablet */
+  }
+}
+
+@media screen and (min-width: 1158px) {
+  .hero {
+    padding: 188px 0; /* desktop */
+  }
+}
+
+/* интервал заголовок-кнопка только через gap */
+.hero-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px; /* mobile */
+}
+
+@media screen and (min-width: 768px) {
+  .hero-wrap {
+    gap: 36px; /* tablet */
+  }
+}
+
+@media screen and (min-width: 1158px) {
+  .hero-wrap {
+    gap: 48px; /* desktop */
+  }
+}
+
+/* margin-top на кнопке не используем */
+.hero-btn {
+  margin-top: 0; /* без !important */
+}
+
+/* 3) FEATURES: на мобилке заголовки должны быть по центру */
+.club-item .title {
+  text-align: center; /* mobile */
+}
+
+/* на tablet+ обычно выравнивание слева */
+@media screen and (min-width: 768px) {
+  .club-item .title {
+    text-align: left;
+  }
+}
+
+/* 4) PORTFOLIO: базовая тень должна быть до 1157px (и на hover тоже) */
+.portfolio-card {
+  box-shadow:
+    0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16),
+    0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+/* на desktop базовая тень может быть выключена (если по макету так) */
+@media screen and (min-width: 1158px) {
+  .portfolio-card {
+    box-shadow: none;
+  }
+
+  .portfolio-card:hover {
+    box-shadow:
+      0px 1px 6px rgba(46, 47, 66, 0.08),
+      0px 1px 1px rgba(46, 47, 66, 0.16),
+      0px 2px 1px rgba(46, 47, 66, 0.08);
   }
 }
