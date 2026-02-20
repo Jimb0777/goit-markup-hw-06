@@ -64,7 +64,7 @@ img {
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding: 0 24px;
+    padding: 0 16px;
   }
 }
 @media (min-width: 1158px) {
@@ -72,11 +72,6 @@ img {
     max-width: 1158px;
     padding: 0 15px;
   }
-}
-
-html,
-body {
-  overflow-x: hidden;
 }
 
 .icon-feature {
@@ -200,7 +195,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: auto;
 }
 
 .close-mobile {
@@ -690,7 +684,8 @@ body {
 .input-email {
   border: 1px solid #fff;
   border-radius: 4px;
-  width: 264px;
+  width: 100%;
+  max-width: 288px;
   height: 40px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
   font-weight: 400;
@@ -1013,9 +1008,11 @@ body {
 }
 
 @media screen and (min-width: 1158px) {
-  .container--narrow {
-    max-width: 1158px;
-    padding: 0 15px;
+  .mobile-menu {
+    display: none;
+  }
+  .burger-menu {
+    display: none;
   }
 }
 
@@ -1027,24 +1024,29 @@ body {
   }
   .header-wrap {
     justify-content: space-between;
-    padding: 16px 0;
+    padding: 0;
   }
   .logo-header {
     margin-right: 0;
   }
-}
+  .page-header {
+    padding: 16px 0;
+  }
 
-.mobile-nav-link-studio,
-.address-nav-mobile {
-  color: #404bbf;
-}
+  .mobile-nav-link-studio,
+  .address-nav-mobile {
+    color: #404bbf;
+  }
 
-.mobile-nav-link {
-  color: #2e2f42;
+  .mobile-nav-link {
+    color: #2e2f42;
+  }
 }
 
 .hero {
-  padding: 112px 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 72px 0;
   min-height: 432px;
   text-align: center;
   background-color: #2e2f42;
@@ -1067,7 +1069,7 @@ body {
 
 @media screen and (min-width: 768px) {
   .hero {
-    padding: 160px 0;
+    padding: 112px 0;
     min-height: 436px;
     background-image:
       linear-gradient(rgba(46, 47, 66, 0.6), rgba(46, 47, 66, 0.6)),
@@ -1167,8 +1169,9 @@ body {
   }
 
   .contacts-list {
+    display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 12px;
   }
 
   .contacts-link {
@@ -1310,6 +1313,7 @@ body {
 
   .input-email {
     width: 264px;
+    max-width: none;
   }
 
   .mail-button {
