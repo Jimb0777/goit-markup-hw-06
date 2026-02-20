@@ -1370,7 +1370,6 @@ img {
   }
 }
 
-/* 5) container--narrow rules (because markup uses it) */
 .container--narrow {
   max-width: 320px;
   margin: 0 auto;
@@ -1464,4 +1463,39 @@ img {
       0px 1px 1px rgba(46, 47, 66, 0.16),
       0px 2px 1px rgba(46, 47, 66, 0.08);
   }
+}
+
+/* FIX: container--narrow must not be max-width:320 */
+.container--narrow {
+  max-width: 320px; /* можно оставить, но лучше НЕ задавать max-width вообще */
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+/* tablet: narrow container uses bigger side paddings */
+@media screen and (min-width: 768px) and (max-width: 1157px) {
+  .container--narrow {
+    max-width: 768px;
+    padding: 0 108px;
+  }
+}
+
+/* desktop: same as normal container */
+@media screen and (min-width: 1158px) {
+  .container--narrow {
+    max-width: 1158px;
+    padding: 0 15px;
+  }
+}
+
+.mobile-nav-link-studio {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.11111;
+  letter-spacing: 0.02em;
+}
+
+/* active/current color (как у тебя и требуется) */
+.mobile-nav-link-studio {
+  color: #404bbf;
 }
