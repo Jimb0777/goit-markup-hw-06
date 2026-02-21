@@ -64,7 +64,7 @@ img {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding: 0 16px; /* важно: НЕ 24 */
+    padding: 0 16px; /* НЕ 24 */
   }
 }
 
@@ -124,6 +124,7 @@ img {
 .page-header {
   background-color: #ffffff;
   border-bottom: 1px solid #e7e9fc;
+  /* высота НЕ через padding у header/обёртки */
   box-shadow:
     0px 2px 1px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16),
@@ -134,7 +135,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between; /* mobile */
-  padding: 16px 0; /* ВАЖНО: высота хедера делается тут */
+  padding: 0; /* важно: не задаём высоту */
 }
 
 .logo-header {
@@ -146,7 +147,9 @@ img {
   text-transform: uppercase;
   color: #4d5ae5;
 
-  margin-right: 0; /* mobile */
+  display: block;
+  padding: 16px 0; /* ✅ высота хедера на мобилке через кликабельный элемент */
+  margin: 0;
 }
 
 .logo-accent {
@@ -167,7 +170,7 @@ img {
 
 /* burger виден на мобилке */
 .burger-menu {
-  padding: 0;
+  padding: 16px 0; /* ✅ высота хедера через кнопку */
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -176,131 +179,6 @@ img {
 .burger-icon {
   display: block;
   fill: #2f2f37;
-}
-
-/* Mobile menu */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-
-  transition:
-    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.mobile-menu.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.mobile-menu-conteiner {
-  position: relative;
-  padding-top: 72px;
-  padding-bottom: 40px;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.close-mobile {
-  border-radius: 50%;
-  background-color: #e7e9fc;
-  position: absolute;
-  top: 24px;
-  right: 24px;
-
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 0;
-  line-height: 0;
-
-  width: 24px;
-  height: 24px;
-
-  transition:
-    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.close-btn-mobile {
-  fill: #2e2f42;
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.close-mobile:hover > .close-btn-mobile,
-.close-mobile:focus > .close-btn-mobile {
-  fill: #fff;
-}
-
-.close-mobile:hover,
-.close-mobile:focus {
-  background-color: #404bbf;
-}
-
-.nav-list-mobile {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 40px;
-}
-
-.mobile-nav-link-studio,
-.address-nav-mobile {
-  color: #404bbf;
-}
-
-.mobile-nav-link {
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.11111;
-  letter-spacing: 0.02em;
-  color: #2e2f42;
-}
-
-.address-mobile {
-  display: block;
-  padding-bottom: 48px;
-}
-
-.address-nav-mobile,
-.address-nav-email {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-}
-
-.address-nav-email {
-  color: #434455;
-}
-
-.address-list-mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  font-style: normal;
-}
-
-.mobile-footer {
-  display: flex;
-  flex-direction: column;
-  margin-top: auto;
-}
-
-.social-links-mobile {
-  display: flex;
-  gap: 40px;
 }
 
 /* Desktop/Tablet header links styles */
@@ -383,7 +261,7 @@ img {
 @media screen and (min-width: 768px) {
   .header-wrap {
     justify-content: flex-start;
-    padding: 0; /* важно: убираем mobile padding */
+    padding: 0;
   }
 
   .burger-menu {
@@ -400,7 +278,8 @@ img {
   }
 
   .logo-header {
-    margin-right: 120px; /* tablet spacing */
+    margin-right: 120px;
+    padding: 0; /* на tablet/desktop высота через nav-link */
   }
 
   .contacts-list {
@@ -417,7 +296,7 @@ img {
 
 @media screen and (min-width: 1158px) {
   .logo-header {
-    margin-right: 76px; /* desktop spacing */
+    margin-right: 76px;
   }
 
   .contacts-list {
@@ -433,13 +312,149 @@ img {
 }
 
 /* =========================
+   Mobile menu
+========================= */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  padding: 0 16px; /* ✅ не хватает паддингов в mobile-menu */
+
+  transition:
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.mobile-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-menu-conteiner {
+  position: relative;
+  padding-top: 72px;
+  padding-bottom: 40px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-top: 0; /* ✅ убрали лишнее */
+}
+
+.close-mobile {
+  border-radius: 100%;
+  background-color: #e7e9fc;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
+  line-height: 0;
+  width: 24px;
+  height: 24px;
+
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-btn-mobile {
+  fill: #2e2f42;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-mobile:hover > .close-btn-mobile,
+.close-mobile:focus > .close-btn-mobile {
+  fill: #fff;
+}
+
+.close-mobile:hover,
+.close-mobile:focus {
+  background-color: #404bbf;
+}
+
+.nav-list-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* ✅ Studio получает ту же типографику, что и остальные */
+.mobile-nav-link,
+.mobile-nav-link-studio {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.11111;
+  letter-spacing: 0.02em;
+  color: #2e2f42;
+}
+
+/* активный цвет */
+.mobile-nav-link-studio {
+  color: #404bbf;
+}
+
+.address-mobile {
+  display: block;
+  padding-bottom: 48px;
+}
+
+.address-nav-mobile,
+.address-nav-email {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.address-nav-mobile {
+  color: #404bbf;
+}
+
+.address-nav-email {
+  color: #434455;
+}
+
+.address-list-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-style: normal;
+}
+
+.mobile-footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto; /* ✅ прижимаем футер меню вниз */
+}
+
+.social-links-mobile {
+  display: flex;
+  gap: 40px;
+}
+
+/* =========================
    Hero (mobile-first)
 ========================= */
 .hero {
   max-width: 1440px;
   margin: 0 auto;
 
-  padding: 112px 0; /* mobile */
+  padding: 112px 0; /* ✅ как в макете */
   min-height: 432px;
 
   text-align: center;
@@ -465,12 +480,12 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 72px; /* ВАЖНО: интервал между заголовком и кнопкой */
+  gap: 72px;
 }
 
 .hero-title {
   margin: 0 auto;
-  max-width: 288px;
+  max-width: 216px; /* ✅ h1 width on mobile */
 
   font-weight: 700;
   font-size: 36px;
@@ -480,6 +495,7 @@ img {
 }
 
 .hero-btn {
+  margin-top: 0; /* ✅ без margin-top */
   padding: 16px 32px;
 
   font-weight: 500;
@@ -605,6 +621,7 @@ img {
   line-height: 1.11;
   letter-spacing: 0.02em;
   color: #2e2f42;
+  text-align: center; /* ✅ mobile center */
 }
 
 .club-item .text {
@@ -625,6 +642,10 @@ img {
   .club-item {
     flex-basis: calc((100% - 24px) / 2);
   }
+
+  .club-item .title {
+    text-align: left;
+  }
 }
 
 /* Desktop features */
@@ -638,7 +659,7 @@ img {
   }
 
   .icon-box {
-    display: flex; /* показываем на десктопе */
+    display: flex;
   }
 
   .club-item .title {
@@ -740,6 +761,12 @@ img {
 .portfolio-card {
   width: 100%;
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ✅ базовая тень до 1157px */
+  box-shadow:
+    0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16),
+    0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
 .portfolio-meta {
@@ -823,6 +850,14 @@ img {
 
   .portfolio-card {
     flex-basis: calc((100% - 48px) / 3);
+    box-shadow: none; /* ✅ на desktop базовая тень выключена */
+  }
+
+  .portfolio-card:hover {
+    box-shadow:
+      0px 1px 6px rgba(46, 47, 66, 0.08),
+      0px 1px 1px rgba(46, 47, 66, 0.16),
+      0px 2px 1px rgba(46, 47, 66, 0.08);
   }
 }
 
@@ -831,7 +866,7 @@ img {
 ========================= */
 .page-footer {
   background-color: #2e2f42;
-  padding: 96px 0; /* mobile */
+  padding: 96px 0; /* base + tablet */
   text-align: center;
 }
 
@@ -990,7 +1025,6 @@ img {
 /* Tablet footer */
 @media screen and (min-width: 768px) {
   .page-footer {
-    padding: 96px 0; /* не меняем на tablet */
     text-align: left;
   }
 
@@ -1025,13 +1059,22 @@ img {
 /* Desktop footer */
 @media screen and (min-width: 1158px) {
   .page-footer {
-    padding: 100px 0; /* меняется только на desktop */
+    padding: 100px 0; /* desktop only */
   }
 
   .page-footer .container {
     flex-wrap: nowrap;
     align-items: baseline;
-    gap: 120px;
+    gap: 0; /* ✅ НЕ 120px */
+  }
+
+  /* ✅ разные отступы между блоками футера */
+  .logo-item-footer {
+    margin-right: 120px; /* 1 -> 2 */
+  }
+
+  .link-item-footer {
+    margin-right: 80px; /* 2 -> 3 (отличается) */
   }
 }
 
@@ -1081,7 +1124,6 @@ img {
     0 1px 3px 0 rgba(0, 0, 0, 0.12),
     0 2px 1px 0 rgba(0, 0, 0, 0.2);
 
-  /* ВАЖНО: правильная ширина модалки на мобилке */
   width: calc(100% - 32px);
   max-width: 288px;
 
@@ -1111,7 +1153,6 @@ img {
   padding: 0;
   line-height: 0;
 
-  /* ВАЖНО: 24px (а не 23.55) */
   width: 24px;
   height: 24px;
 
@@ -1135,7 +1176,6 @@ img {
   background-color: #404bbf;
 }
 
-/* Form parts (оставил как у тебя, чтобы не ломать) */
 .text-popup {
   font-weight: 500;
   font-size: 16px;
@@ -1295,90 +1335,18 @@ img {
   background-color: #404bbf;
 }
 
-/* mobile */
+/* =========================
+   Narrow container (used in team/footer)
+========================= */
 .container--narrow {
   max-width: 320px;
   padding: 0 16px;
   margin: 0 auto;
 }
 
-/* tablet */
 @media screen and (min-width: 768px) {
   .container--narrow {
-    max-width: 768px;
-    padding: 0 108px;
-  }
-}
-
-/* desktop */
-@media screen and (min-width: 1158px) {
-  .container--narrow {
-    max-width: 1158px;
-    padding: 0 15px;
-  }
-}
-
-/* 1) Header: remove vertical padding from <header> */
-.page-header {
-  padding: 0; /* IMPORTANT: height must NOT come from header padding */
-}
-
-/* Если у тебя на мобилке высота хедера была через padding у logo/burger — оставь так.
-   (То есть .logo-header { padding: 16px 0; } и .burger-menu { padding: 16px 0; } — ок) */
-
-/* 2) Hero: spacing between title and button must NOT be margin-top on button */
-.hero-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 72px; /* mobile distance between title and button */
-}
-
-/* tablet */
-@media screen and (min-width: 768px) {
-  .hero-wrap {
-    gap: 36px; /* tablet distance */
-  }
-}
-
-/* desktop */
-@media screen and (min-width: 1158px) {
-  .hero-wrap {
-    gap: 48px; /* desktop distance */
-  }
-}
-
-/* 3) Container: do NOT change horizontal padding to 24px on tablet */
-.container {
-  padding: 0 16px; /* base + tablet */
-}
-
-@media screen and (min-width: 1158px) {
-  .container {
-    padding: 0 15px; /* only desktop changes */
-  }
-}
-
-/* 4) Footer padding: should stay base on tablet, change only on desktop */
-.page-footer {
-  padding: 96px 0; /* base + tablet */
-}
-
-@media screen and (min-width: 1158px) {
-  .page-footer {
-    padding: 100px 0; /* desktop only */
-  }
-}
-
-.container--narrow {
-  max-width: 320px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-@media screen and (min-width: 768px) {
-  .container--narrow {
-    max-width: 584px; /* narrow width for tablet (footer/team layout) */
+    max-width: 584px;
     padding: 0 16px;
   }
 }
@@ -1388,114 +1356,4 @@ img {
     max-width: 1158px;
     padding: 0 15px;
   }
-}
-
-.hero {
-  padding: 72px 0; /* mobile */
-}
-
-@media screen and (min-width: 768px) {
-  .hero {
-    padding: 112px 0; /* tablet */
-  }
-}
-
-@media screen and (min-width: 1158px) {
-  .hero {
-    padding: 188px 0; /* desktop */
-  }
-}
-
-/* интервал заголовок-кнопка только через gap */
-.hero-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 72px; /* mobile */
-}
-
-@media screen and (min-width: 768px) {
-  .hero-wrap {
-    gap: 36px; /* tablet */
-  }
-}
-
-@media screen and (min-width: 1158px) {
-  .hero-wrap {
-    gap: 48px; /* desktop */
-  }
-}
-
-/* margin-top на кнопке не используем */
-.hero-btn {
-  margin-top: 0; /* без !important */
-}
-
-/* 3) FEATURES: на мобилке заголовки должны быть по центру */
-.club-item .title {
-  text-align: center; /* mobile */
-}
-
-/* на tablet+ обычно выравнивание слева */
-@media screen and (min-width: 768px) {
-  .club-item .title {
-    text-align: left;
-  }
-}
-
-/* 4) PORTFOLIO: базовая тень должна быть до 1157px (и на hover тоже) */
-.portfolio-card {
-  box-shadow:
-    0px 1px 6px rgba(46, 47, 66, 0.08),
-    0px 1px 1px rgba(46, 47, 66, 0.16),
-    0px 2px 1px rgba(46, 47, 66, 0.08);
-}
-
-/* на desktop базовая тень может быть выключена (если по макету так) */
-@media screen and (min-width: 1158px) {
-  .portfolio-card {
-    box-shadow: none;
-  }
-
-  .portfolio-card:hover {
-    box-shadow:
-      0px 1px 6px rgba(46, 47, 66, 0.08),
-      0px 1px 1px rgba(46, 47, 66, 0.16),
-      0px 2px 1px rgba(46, 47, 66, 0.08);
-  }
-}
-
-/* FIX: container--narrow must not be max-width:320 */
-.container--narrow {
-  max-width: 320px; /* можно оставить, но лучше НЕ задавать max-width вообще */
-  padding: 0 16px;
-  margin: 0 auto;
-}
-
-/* tablet: narrow container uses bigger side paddings */
-@media screen and (min-width: 768px) and (max-width: 1157px) {
-  .container--narrow {
-    max-width: 768px;
-    padding: 0 108px;
-  }
-}
-
-/* desktop: same as normal container */
-@media screen and (min-width: 1158px) {
-  .container--narrow {
-    max-width: 1158px;
-    padding: 0 15px;
-  }
-}
-
-.mobile-nav-link-studio {
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 1.11111;
-  letter-spacing: 0.02em;
-}
-
-/* active/current color (как у тебя и требуется) */
-.mobile-nav-link-studio {
-  color: #404bbf;
 }
